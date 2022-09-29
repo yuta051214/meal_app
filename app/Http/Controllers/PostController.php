@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -39,6 +41,9 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
+
+        $category = Category::find($request->category);
+        $post->category_id = $category->id;
 
         $file = $request->file('image');
         $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
@@ -75,7 +80,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     /**

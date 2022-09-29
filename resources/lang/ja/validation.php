@@ -129,6 +129,7 @@ return [
     ],
     'attributes'           => [
         'title' => 'タイトル',
+        'category' => 'カテゴリー',
         'body' => '本文',
         'image' => '画像',
     ],
