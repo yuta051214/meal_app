@@ -41,9 +41,8 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
-
-        $category = Category::find($request->category);
-        $post->category_id = $category->id;
+        // $category = Category::find($request->category);
+        $post->category_id = $request->category;
 
         $file = $request->file('image');
         $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
@@ -69,7 +68,8 @@ class PostController extends Controller
         }
 
         return redirect()
-            ->route('posts.show', $post);
+            ->route('posts.show', $post)
+            ->with('notice', '記事を登録しました');
     }
 
     /**
