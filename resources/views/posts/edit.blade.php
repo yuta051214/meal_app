@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
-        <h2 class="text-center text-lg font-bold pt-6 tracking-widest">ブログ編集</h2>
+        <h2 class="text-center text-lg font-bold pt-6 tracking-widest">食事記事編集</h2>
 
         <x-validation-errors :errors="$errors" />
 
@@ -21,7 +21,7 @@
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="category">カテゴリー</label>
                 @foreach ($categories as $category)
-                    <p><input type="radio" name="category" value="{{ $category->id }}">{{ $category->category }}</p>
+                    <p><input type="radio" name="category" value="{{ $category->id }}"  {{ old("category", $post->category_id) == $category->id ? "checked" : "" }} >{{ $category->category }}</p>
                 @endforeach
             </div>
 
@@ -36,7 +36,7 @@
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="image">
-                    ブログ用画像
+                    食事の画像
                 </label>
                 <img src="{{ $post->image_url }}" alt="" class="mb-4 md:w-2/5 sm:auto">
                 <input type="file" name="image" class="border-gray-300">
