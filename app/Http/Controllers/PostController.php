@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -82,8 +84,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-
-        return view('posts.show', compact('post'));
+        $like = Like::where('user_id', Auth::id())->where('post_id', $post->id)->first();
+        $like_count = Like::where('post_id', $post->id)->count();
+        return view('posts.show', compact('post', 'like', 'like_count'));
     }
 
     /**
