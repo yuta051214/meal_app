@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
-        $post->category_id = $request->category;
+        $post->category_id = $request->category;    // fillableを使うならフォームのnamewをcategory_idと同じにする必要がある
 
         $file = $request->file('image');
         $post->image = self::createFileName($file);
@@ -84,9 +84,15 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        $like = Like::where('user_id', Auth::id())->where('post_id', $post->id)->first();
-        $like_count = Like::where('post_id', $post->id)->count();
-        return view('posts.show', compact('post', 'like', 'like_count'));
+
+        if(Auth::check()){
+            $like = Like::where('user_id', Auth::id())->where('post_id', $post->id)->first();
+
+            // dd($like);
+
+            $like_count = Like::where('post_id', $post->id)->count();
+            return view('posts.show', compact('post', 'like', 'like_count'));
+        }
     }
 
     /**
@@ -124,6 +130,7 @@ class PostController extends Controller
             $post->image = self::createFileName($file);
         }
         $post->fill($request->all());
+        $post->category_id = $request->category;
 
         // トランザクション開始
         DB::beginTransaction();
