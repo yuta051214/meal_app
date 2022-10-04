@@ -19,8 +19,9 @@
                         <img class="w-full mb-2" src="{{ $post->image_url }}" alt="">
                         <p class="text-gray-700 text-base">{{ Str::limit($post->body, 50) }}</p>
 
-                        <?php $like_count = \App\Models\Like::where('post_id', $post->id)->count(); ?>
-                        <div>お気に入り数：{{ $like_count }}</div>
+                        {{-- <?php $like_count = \App\Models\Like::where('post_id', $post->id)->count(); ?> --}}
+                        {{-- <div>お気に入り数：{{ $like_count }}</div> --}}
+                        <div>お気に入り数：{{ $post->likes()->count(); }}</div>
                     </a>
                 </article>
             @endforeach

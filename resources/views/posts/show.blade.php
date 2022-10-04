@@ -36,7 +36,8 @@
                     </form>
                 </div>
             @endif
-            <div>お気に入り数：{{ $like_count }}</div>
+            {{-- <div>お気に入り数：{{ $like_count }}</div> --}}
+            <div>お気に入り数：{{ $post->likes()->count(); }}</div>
         @endauth
 
         <div class="flex flex-row text-center my-4">

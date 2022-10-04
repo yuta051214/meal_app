@@ -19,7 +19,7 @@
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="category">カテゴリー</label>
                 @foreach ($categories as $category)
-                    <p><input type="radio" name="category" value="{{ $category->id }}" {{ old("category") == $category->id ? "checked" : "" }} >{{ $category->category }}</p>
+                    <p><input type="radio" name="category_id" value="{{ $category->id }}" {{ old("category") == $category->id ? "checked" : "" }} >{{ $category->category }}</p>
                 @endforeach
             </div>
 
