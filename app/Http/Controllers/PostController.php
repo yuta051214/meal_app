@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
-        $post->category_id = $request->category;    // fillableを使うならフォームのnamewをcategory_idと同じにする必要がある
+        // $post->category_id = $request->category;    // fillableを使うならフォームのnamewをcategory_idと同じにする必要がある
 
         $file = $request->file('image');
         $post->image = self::createFileName($file);

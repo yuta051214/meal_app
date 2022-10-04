@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
         $route = $this->route()->getName();
         $rule = [
             'title' => 'required|string|max:50',
-            'category' => 'required',
+            'category_id' => 'required',
             'body' => 'required|string|max:2000',
         ];
 

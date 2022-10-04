@@ -34,8 +34,8 @@ class Post extends Model
 
     protected $fillable = [
         'title',
+        'category_id',
         'body',
-        // 'category',
     ];
 
     public function getImageUrlAttribute()
