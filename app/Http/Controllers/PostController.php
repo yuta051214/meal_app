@@ -87,11 +87,10 @@ class PostController extends Controller
 
         if(Auth::check()){
             $like = Like::where('user_id', Auth::id())->where('post_id', $post->id)->first();
-
-            // dd($like);
-
             $like_count = Like::where('post_id', $post->id)->count();
             return view('posts.show', compact('post', 'like', 'like_count'));
+        }else{
+            return back()->with('notice', 'ログインする必要があります。');
         }
     }
 
